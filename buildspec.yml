@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+    parameter-store:
+        REGISTRY_URL: /prime-api/registry_url
+        ACCESS_KEY_ID: /prime-api/access_key_id
+        SECRET_ACCESS_KEY: /prime-api/secret_access_key
+
+phases:
+    build:
+        commands:
+            - aws configure set aws_access_key_id "$ACCESS_KEY_ID" && aws configure set aws_secret_access_key "$SECRET_ACCESS_KEY"
+            - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REGISTRY_URL
+            - docker build -t prime-api .
+            - docker tag prime-api:latest $REGISTRY_URL/prime-api:$CODEBUILD_BUILD_NUMBER
+            - docker push $REGISTRY_URL/prime-api:$CODEBUILD_BUILD_NUMBER
+    post_build:
+        commands:
+            # store build number into a parameter in parameter store
+            - aws ssm put-parameter --name "/prime-api/codebuild_build_number" --value "$CODEBUILD_BUILD_NUMBER" --type "String" --region ap-south-1 --overwrite
+
+artifacts:
+    files:
+        - appspec.yml
+        - scripts/*.sh
