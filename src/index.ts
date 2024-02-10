@@ -40,6 +40,8 @@ app.get('/primes/:num', (req, res) => {
     return res.send(`First ${num} prime numbers are [${primes.join(',')}]`);
 });
 
+app.get('/author', (req, res) => res.send(`Aniruddha Banerjee`));
+
 
 const server = http.createServer(app);
 server.listen(3000, () => console.log(`Server is listening on port 3000`));
