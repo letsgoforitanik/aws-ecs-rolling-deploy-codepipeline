@@ -46,7 +46,7 @@ app.get('/primes/:num', (req, res) => {
 });
 
 
-app.get('/fib:num', (req, res) => {
+app.get('/fib/:num', (req, res) => {
     const num = Number(req.params.num);
     const answer = fib(num - 1) + fib(num - 2);
     return res.send(`Fibonacci(${num}) number is ${answer}`);
