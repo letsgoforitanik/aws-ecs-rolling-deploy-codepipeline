@@ -33,6 +33,11 @@ function getPrimes(limit: number): number[] {
     return primes;
 }
 
+function fib(num: number): number {
+    if (num < 2) return num;
+    return fib(num - 1) + fib(num - 2);
+}
+
 
 app.get('/primes/:num', (req, res) => {
     const num = Number(req.params.num);
@@ -40,8 +45,14 @@ app.get('/primes/:num', (req, res) => {
     return res.send(`First ${num} prime numbers are [${primes.join(',')}]`);
 });
 
-app.get('/author', (req, res) => res.send(`Aniruddha Banerjee`));
 
+app.get('/fib:num', (req, res) => {
+    const num = Number(req.params.num);
+    const answer = fib(num - 1) + fib(num - 2);
+    return res.send(`Fibonacci(${num}) number is ${answer}`);
+});
+
+app.get('/author', (req, res) => res.send(`Aniruddha Banerjee`));
 
 const server = http.createServer(app);
 server.listen(3000, () => console.log(`Server is listening on port 3000`));
