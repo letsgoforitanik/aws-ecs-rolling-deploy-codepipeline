@@ -40,7 +40,7 @@ app.get('/primes/:num', (req, res) => {
     return res.send(`First ${num} prime numbers are [${primes.join(',')}]`);
 });
 
-app.get('/author', (req, res) => res.send(`Aniruddha Banerjee`));
+app.get('/author', (req, res) => res.send(`Author is Aniruddha Banerjee`));
 
 
 const server = http.createServer(app);
