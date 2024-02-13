@@ -54,7 +54,7 @@ app.get('/fib/:num', (req, res) => {
 
 app.get('/author', (req, res) => res.send(`Author is Aniruddha Banerjee`));
 
-app.get('/', (req, res) => res.send('Welcome from Roger Federer'));
+app.get('/', (req, res) => res.send('Welcome from Aniruddha Banerjee'));
 
 const server = http.createServer(app);
 server.listen(3000, () => console.log(`Server is listening on port 3000`));
