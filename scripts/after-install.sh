@@ -1,4 +1,5 @@
 #!/bin/bash
 
-source /home/ubuntu/.nvm/nvm.sh
+echo $USER >> /home/ubuntu/dump.txt
+echo $PATH >> /home/ubuntu/dump.txt
 pm2 restart all
