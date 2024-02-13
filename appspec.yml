@@ -2,6 +2,10 @@ version: 0.0
 
 os: linux
 
+files:
+    - source: /
+      destination: $HOME/app
+
 hooks:
     AfterInstall:
         - location: scripts/after-install.sh
