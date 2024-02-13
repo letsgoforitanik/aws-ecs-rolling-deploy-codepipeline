@@ -4,7 +4,7 @@ os: linux
 
 files:
     - source: /
-      destination: $HOME/app
+      destination: /home/ubuntu/app
 
 hooks:
     AfterInstall:
