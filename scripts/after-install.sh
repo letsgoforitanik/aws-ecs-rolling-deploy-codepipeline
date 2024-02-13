@@ -1,5 +1,4 @@
 #!/bin/bash
 
-echo $USER >> /home/ubuntu/dump.txt
-echo $PATH >> /home/ubuntu/dump.txt
-pm2 restart all
+pm2 delete all
+pm2 start /home/ubuntu/app/dist/index.js
