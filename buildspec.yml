@@ -15,6 +15,7 @@ cache:
 
 artifacts:
     files:
+        - node_modules/**/*
         - appspec.yml
         - scripts/**/*
         - dist/**/*
