@@ -19,6 +19,10 @@ phases:
             # store build number into a parameter in parameter store
             - aws ssm put-parameter --name "/prime-api/codebuild_build_number" --value "$CODEBUILD_BUILD_NUMBER" --type "String" --region ap-south-1 --overwrite
 
+cache:
+    paths:
+        - node_modules/**/*
+
 artifacts:
     files:
         - appspec.yml
