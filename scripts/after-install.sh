@@ -1,4 +1,3 @@
 #!/bin/bash
 
-ls
-pwd
+pm2 restart all
