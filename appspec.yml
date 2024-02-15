@@ -7,5 +7,5 @@ files:
       destination: /home/ubuntu/app
 
 hooks:
-    AfterBlockTraffic:
+    ValidateService:
         - location: scripts/after-install-blah-blah.sh
