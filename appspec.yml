@@ -8,4 +8,4 @@ files:
 
 hooks:
     ValidateService:
-        - location: scripts/after-install-blah-blah.sh
+        - location: scripts/after-install.sh
