@@ -7,5 +7,5 @@ files:
       destination: /home/ubuntu/app
 
 hooks:
-    AfterInstall:
+    AfterBlockTraffic:
         - location: scripts/after-install.sh
