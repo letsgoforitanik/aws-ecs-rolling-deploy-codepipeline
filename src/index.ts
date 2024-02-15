@@ -1,43 +1,10 @@
 import http from "http";
+import os from "os";
 import express from "express";
 
+import { fib, getPrimes } from "./fn";
+
 const app = express();
-
-function isPrime(num: number): boolean {
-
-    let i = Math.floor(num / 2)
-
-    for (; i >= 2; i--) {
-        if (num % i === 0) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-function getPrimes(limit: number): number[] {
-
-    let i: number;
-    let term: number;
-
-    const primes: number[] = [];
-
-    for (i = 2, term = 0; term < limit; i++) {
-        if (isPrime(i)) {
-            term++;
-            primes.push(i);
-        }
-    }
-
-    return primes;
-}
-
-function fib(num: number): number {
-    if (num < 2) return num;
-    return fib(num - 1) + fib(num - 2);
-}
-
 
 app.get('/primes/:num', (req, res) => {
     const num = Number(req.params.num);
@@ -52,9 +19,9 @@ app.get('/fib/:num', (req, res) => {
     return res.send(`Fibonacci(${num}) number is ${answer}`);
 });
 
-app.get('/author', (req, res) => res.send(`Author is Aniruddha Banerjee`));
+app.get('/author', (req, res) => res.send(`Authored by Aniruddha Banerjee`));
 
-app.get('/', (req, res) => res.send('Welcome from Aniruddha Banerjee'));
+app.get('/', (req, res) => res.send(`Hello from Host ${os.hostname()}`));
 
 const server = http.createServer(app);
 server.listen(3000, () => console.log(`Server is listening on port 3000`));
