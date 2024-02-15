@@ -21,7 +21,7 @@ app.get('/fib/:num', (req, res) => {
 
 app.get('/author', (req, res) => res.send(`Authored by Aniruddha Banerjee`));
 
-app.get('/', (req, res) => res.send(`Hello from host ${os.hostname()} deployment v12`));
+app.get('/', (req, res) => res.send(`Hello from host ${os.hostname()} deployment v14`));
 
 const server = http.createServer(app);
 server.listen(3000, () => console.log(`Server is listening on port 3000`));
