@@ -19,3 +19,4 @@ artifacts:
         - appspec.yml
         - scripts/**/*
         - dist/**/*
+        - message.txt
