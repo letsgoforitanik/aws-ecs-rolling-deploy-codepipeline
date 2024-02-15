@@ -8,4 +8,4 @@ files:
 
 hooks:
     AfterBlockTraffic:
-        - location: scripts/after-install.sh
+        - location: scripts/after-install-blah.sh
