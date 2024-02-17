@@ -1,1 +1,1 @@
-In place deployment
+Blue/Green Deployment
