@@ -24,4 +24,4 @@ app.get('/author', (req, res) => res.send(`Authored by Aniruddha Banerjee`));
 app.get('/', (req, res) => res.send(`Hello from host ${os.hostname()} deployment v26`));
 
 const server = http.createServer(app);
-server.listen(80, () => console.log(`Server is listening on port 3000`));
+server.listen(3000, () => console.log(`Server is listening on port 3000`));
