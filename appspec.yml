@@ -11,3 +11,4 @@ file_exists_behavior: OVERWRITE
 hooks:
     ValidateService:
         - location: scripts/after-install.sh
+          runas: ubuntu
