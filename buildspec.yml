@@ -19,7 +19,7 @@ phases:
             - echo Pushing the Docker image...
             - docker push $REPOSITORY_URI:$COMMIT_HASH
             - echo Writing image definitions file...
-            - printf '[{"name":"prime-api-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+            - printf '[{"name":"prime-api-container","imageUri":"%s"}]' $REPOSITORY_URI:$COMMIT_HASH > imagedefinitions.json
 
 artifacts:
     files: imagedefinitions.json
