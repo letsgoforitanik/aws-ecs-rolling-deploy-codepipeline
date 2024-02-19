@@ -1,22 +1,26 @@
 version: 0.2
 
 phases:
-    install:
-        runtime-versions:
-            nodejs: 20.x
+    pre_build:
+        commands:
+            - echo Logging in to Amazon ECR
+            - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REGISTRY_URI
+            - REPOSITORY_URI=$REGISTRY_URI/prime-api
+            - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
     build:
         commands:
-            - npm install
-            - npm run build
-
-cache:
-    paths:
-        - node_modules/**/*
+            - echo Build started on `date`
+            - echo Building the Docker image...
+            - docker build -t prime-api:latest .
+            - docker tag prime-api:latest $REPOSITORY_URI:$COMMIT_HASH
+    post_build:
+        commands:
+            - echo Build completed on `date`
+            - echo Pushing the Docker images...
+            - docker push $REPOSITORY_URI:$COMMIT_HASH
+            - docker push $REPOSITORY_URI:latest
+            - echo Writing image definitions file...
+            - printf '[{"name":"prime-api-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 
 artifacts:
-    files:
-        - node_modules/**/*
-        - appspec.yml
-        - scripts/**/*
-        - dist/**/*
-        - message.txt
+    files: imagedefinitions.json
