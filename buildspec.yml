@@ -18,7 +18,6 @@ phases:
             - echo Build completed on `date`
             - echo Pushing the Docker images...
             - docker push $REPOSITORY_URI:$COMMIT_HASH
-            - docker push $REPOSITORY_URI:latest
             - echo Writing image definitions file...
             - printf '[{"name":"prime-api-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 
