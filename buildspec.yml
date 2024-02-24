@@ -19,7 +19,11 @@ phases:
             - echo Pushing the Docker image...
             - docker push $REPOSITORY_URI:$COMMIT_HASH
             - echo Writing image definitions file...
-            - printf '[{"name":"prime-api-container","imageUri":"%s"}]' $REPOSITORY_URI:$COMMIT_HASH > imagedefinitions.json
-
+            - printf '[{"name":"prime-api-container","image":"%s","memory":1024}]' $REPOSITORY_URI:$COMMIT_HASH > taskdefinition.json
+            - aws ecs register-task-definition --family prime-api-task-definition --container-definitions file://taskdefinition.json
+            - TASK_DEFINITION_ARN=$(aws ecs describe-task-definition --task-definition prime-api-task-definition  --query 'taskDefinition.taskDefinitionArn' --output text)
+            - sed -i "s|<%TASK_DEFINITION_ARN%>|$TASK_DEFINITION_ARN|g" appspec.yml
+            - cat appspec.yml
 artifacts:
-    files: imagedefinitions.json
+    files:
+        - appspec.yml
